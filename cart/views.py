@@ -31,3 +31,7 @@ def cart_remove(request, product_id):
     cart.remove(product)
     # Then, we redirect the user to the cart_detail URL
     return redirect('cart:cart_detail')
+
+def cart_detail(request):
+    cart = Cart(request)
+    return render(request, 'cart/detail.html', {'cart': cart})
