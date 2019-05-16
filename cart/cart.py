@@ -33,7 +33,7 @@ class Cart(object):
         else:
             # New quantity added to existing quantity
             self.cart[product_id]['quantity'] += quantity
-            self.save()
+        self.save()
 
     def save(self):
         # mark the session as "modified" to make sure it gets saved
