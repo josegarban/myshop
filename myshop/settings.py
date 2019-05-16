@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import readcredentials
+from credentials import readcredentials
+my_credentials = readcredentials.readcredentials()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = readcredentials.readcredentials()[6]
+SECRET_KEY = my_credentials[6]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -132,3 +133,14 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 # SESSION_COOKIE_DOMAIN : set later
 CART_SESSION_ID = 'cart'
+
+# Email and Disqus settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = my_credentials[0]
+EMAIL_HOST_USER = my_credentials[1]
+EMAIL_HOST_PASSWORD = my_credentials[2]
+EMAIL_PORT = int(my_credentials[3])
+EMAIL_USE_TLS = True
+DISQUS_API_KEY = my_credentials[4]
+DISQUS_WEBSITE_SHORTNAME = my_credentials[5]
