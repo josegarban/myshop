@@ -11,7 +11,7 @@ def order_create(request):
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
 
-        if form.is_valid():
+        if form.is_valid() and len(cart) > 0:
             order = form.save()
             for item in cart:
                 OrderItem.objects.create(order=order,
@@ -25,6 +25,11 @@ def order_create(request):
             order_created(order.id)
             context = {'order': order}
             return render(request, 'orders/order/created.html', context)
+
+        if form.is_valid() and len(cart) < 1:
+            context = {}
+            return render(request, 'orders/order/emptyorder.html', context)
+
     else:
         form = OrderCreateForm()
         context = {'cart': cart,
