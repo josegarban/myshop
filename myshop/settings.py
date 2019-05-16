@@ -125,3 +125,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Sessions
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# SESSION_COOKIE_DOMAIN : set later
