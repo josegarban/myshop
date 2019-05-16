@@ -144,3 +144,9 @@ EMAIL_PORT = int(my_credentials[3])
 EMAIL_USE_TLS = True
 DISQUS_API_KEY = my_credentials[4]
 DISQUS_WEBSITE_SHORTNAME = my_credentials[5]
+
+# CELERY
+# CELERY_ACCEPT_CONTENT = ['pickle','json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_ALWAYS_EAGER = True

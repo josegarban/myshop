@@ -1,11 +1,11 @@
-from celery import task
+# from celery import task
 from django.core.mail import send_mail
 from .models import Order
 
 from credentials import readcredentials
 my_credentials = readcredentials.readcredentials()
 
-@task
+# @task
 def order_created(order_id):
     """
     Task to send an e-mail notification when an order is
@@ -19,5 +19,6 @@ def order_created(order_id):
     mail_sent = send_mail(subject,
                           message,
                           my_credentials[1],
-                          [order.email])
+                          [order.email],
+                          fail_silently=False)
     return mail_sent
