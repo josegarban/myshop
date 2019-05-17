@@ -9,48 +9,52 @@
   <br>
   <main>
     <div id="main" class="container">
-      <div class="container">
-        <div class="card" style="width: 18rem;">
-          <div class="card-header">
-            Categories
-          </div>
-          <ul class="list-group list-group-flush">
-
-            {% for c in categories %}
-            <li {% if category.slug == c.slug %}class="list-group-item"
-            {% endif %}>
-            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-      <div class="container">
-        <h1>
+      <div class="row">
+        <h3>
+          Select category
+        </h3>
+        <ul class="nav nav-pills">
+          {% for c in categories %}
+          <li {% if category.slug == c.slug %} class="active"
+              {% endif %}>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      <div class="container row">
+        <h3>
           {% if category %}{{ category.name }}
           {% else %}All products
           {% endif %}
-        </h1>
-        <div class="card-deck mb-3 text-center">
-          {% for product in products %}
-          <div class="item card" style="width: 18rem;">
-            <a href="{{ product.get_absolute_url }}">
-              <img src='{% if product.image %}
-              {{ product.image.url }}
-              {% else %}
-              {% static "img/no_image.png" %}
-              {% endif %}'
-              class="card-img-top">
-            </a>
-            <div class="card-body">
-              <h5 class="card-title">{{ product.name }}</h5>
-              <p class="card-title">{{ product.category }}</p>
-              <p class="card-text">${{ product.price }}</p>
-              <a href="{{ product.get_absolute_url }}" class="btn btn-success">Add to cart</a>
+        </h3>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          {% for product in products|slice:":"%}
+            <div class="col-sm-3" style="height:35rem;">
+                <div>
+                  <a href="{{ product.get_absolute_url }}">
+                    <img src='{% if product.image %}
+                    {{ product.image.url }}
+                    {% else %}
+                    {% static "img/no_image.png" %}
+                    {% endif %}'
+                    class="">
+                  </a>
+                </div>
+                <div>
+                  <p class="text-muted">{{ product.category }}</p>
+                  <h4 class="" style="height:6.5rem;">{{ product.name }}</h4>
+                  <p class="">${{ product.price }}</p>
+                  <a href="{{ product.get_absolute_url }}" class="btn btn-success">Add to cart</a>
+                </div>
             </div>
-          </div>
           {% endfor %}
         </div>
+
+
+
+
       </div>
 
     </div>

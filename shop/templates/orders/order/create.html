@@ -14,7 +14,7 @@
     <ul>
       {% for item in cart %}
         <li>
-          {{ item.quantity }} × {{ item.product.name }} =
+          {{ item.quantity }} × {{ item.product.name }} - {{ item.product.category }} =
           <span>${{ item.total_price }}</span>.
         </li>
       {% endfor %}
@@ -34,7 +34,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">{{ field.label_tag }}</span>
           </div>
-          {{ field }}          
+          {{ field }}
         </div>
       {% endfor %}
       <br>
