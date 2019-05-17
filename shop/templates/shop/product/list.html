@@ -6,15 +6,18 @@
 {% endblock %}
 
 {% block content %}
-  <div id="sidebar">
-    <h3>Categories</h3>
-    <ul>
-      <li {% if not category %}class="selected"{% endif %}>
+  <br>
+  <div class="card" style="width: 18rem;">
+    <div class="card-header">
+      Categories
+    </div>
+    <ul class="list-group list-group-flush">
+      <li {% if not category %}class="selected list-group-item"{% endif %}>
         <a href="{% url "shop:product_list" %}">All categories</a>
       </li>
 
       {% for c in categories %}
-        <li {% if category.slug == c.slug %}class="selected"
+        <li {% if category.slug == c.slug %}class="selected list-group-item"
             {% endif %}>
             <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
         </li>
@@ -29,17 +32,25 @@
       {% endif %}
     </h1>
 
-    {% for product in products %}
-      <div class="item">
-        <a href="{{ product.get_absolute_url }}">
-          <img src="{% if product.image %}{{ product.image.url }}
-                    {% else %}{% static "img/no_image.png" %}
-                    {% endif %}">
-        </a>
-        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-        <br>
-        ${{ product.price }}
+    <div class="container">
+      <div class="card-deck mb-3 text-center">
+        {% for product in products %}
+        <div class="item card" style="width: 18rem;">
+          <a href="{{ product.get_absolute_url }}">
+            <img src='{% if product.image %}{{ product.image.url }}
+            {% else %}{% static "img/no_image.png" %}
+            {% endif %}' class="card-img-top">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">${{ product.price }}</p>
+            <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Add to cart</a>
+          </div>
+        </div>
+        {% endfor %}
       </div>
-    {% endfor %}
+    </div>
+
   </div>
+
 {% endblock %}

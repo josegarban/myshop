@@ -29,8 +29,17 @@
 
   {% else %}
     <form action="." method="post" class="order-form">
-      {{ form.as_p }}
-      <p><input type="submit" value="Place order"></p>
+      {% for field in form %}
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">{{ field.label_tag }}</span>
+          </div>
+          {{ field }}          
+        </div>
+      {% endfor %}
+      <br>
+      <button type="button submit" value="Place order" class="btn btn-primary">Place order</button>
+
       {% csrf_token %}
     </form>
 
