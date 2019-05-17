@@ -5,6 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <title>{% block title %}My shop{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "css/reset.css" %}">
     <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "css/bootstrap-theme.min.css" %}">
     <link rel="stylesheet" href="{% static "css/base.css" %}">
@@ -12,25 +13,31 @@
 
   <body>
 
-    <div id="header">
-      <a href="/" class="logo">My shop</a>
-    </div>
-
-    <div id="subheader">
-      <div class="cart">
-        {% with total_items=cart|length %}
-          {% if cart|length > 0 %}
+    <header>
+      <div id="logo">
+        <a href="" class="logo">My shop</a>
+      </div>
+      <nav>
+        <ul class="nav">
+          <li class="cart nav-item">
+            {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
             Your cart:
             <a href="{% url "cart:cart_detail" %}">
               {{ total_items }} item{{ total_items|pluralize }},
               ${{ cart.get_total_price }}
             </a>
-          {% else %}
+            {% else %}
             Your cart is empty.
-          {% endif %}
-        {% endwith %}
-      </div>
-    </div>
+            {% endif %}
+            {% endwith %}
+          </div>
+        </ul>
+      </nav>
+    </header>
+
+
+
 
     <div id="content">
       {% block content %}
