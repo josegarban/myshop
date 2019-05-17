@@ -11,16 +11,17 @@ Your shopping cart
 
     <div class="container">
       <div class="row">
-        <table class="cart  container-fluid">
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th>Image</th>
-              <th>Product</th>
-              <th>Category</th>
-              <th>Quantity</th>
-              <th>Remove</th>
-              <th>Unit price</th>
-              <th>Price</th>
+              <th scope="col"><strong>Item</strong></th>
+              <!-- <th scope="col">Image</th> -->
+              <th scope="col"><strong>Product</strong></th>
+              <th scope="col"><strong>Category</strong></th>
+              <th scope="col"><strong>Quantity</strong></th>
+              <th scope="col"><strong>Remove item(s)</strong></th>
+              <th scope="col"><strong>Unit price</strong></th>
+              <th scope="col"><strong>Subtotal</strong></th>
             </tr>
           </thead>
 
@@ -28,12 +29,15 @@ Your shopping cart
             {% for item in cart %}
             {% with product=item.product %}
             <tr>
-              <td>
+              <th scope="row">
+                {{ item.line }}
+              </th>
+              <!-- <td>
                 <a href="{{ product.get_absolute_url }}">
                   <img src="{% if product.image %}{{ product.image.url }}
                   {% else %}{% static "img/no_image.png" %}{% endif %}">
                 </a>
-              </td>
+              </td> -->
               <td>
                 {{ product.name }}
               </td>
@@ -46,7 +50,7 @@ Your shopping cart
                       {{ item.update_quantity_form.quantity }}
                   </div>
                   <div class="form-group mx-sm-3 mb-2">
-                      <input class="btn btn-success" type="submit" value="Update">
+                      <input class="btn btn-success btn-sm" type="submit" value="Update">
                       {{ item.update_quantity_form.update }}
                       {% csrf_token %}
                   </div>
@@ -54,7 +58,7 @@ Your shopping cart
                 </form>
               </td>
               <td>
-                <a class="btn btn-danger" href="{% url 'cart:cart_remove' product.id %}">
+                <a class="btn btn-danger btn-sm" href="{% url 'cart:cart_remove' product.id %}">
                   Remove
                 </a>
               </td>
@@ -68,10 +72,10 @@ Your shopping cart
             {% endwith %}
             {% endfor %}
             <tr class="total">
-              <td>Total</td>
-              <td colspan="4"></td>
+              <td><strong>Total</strong></td>
+              <td colspan="5"></td>
               <td class="num">
-                ${{ cart.get_total_price }}
+                <strong>${{ cart.get_total_price }}</strong>
               </td>
             </tr>
           </tbody>
